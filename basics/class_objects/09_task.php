@@ -17,15 +17,16 @@ class BankAccount
     }
     function showNegativeBalance(): string
     {
-       //$negative = gmp_neg($this->balance);
-        return $this->name . ", $" . number_format($this->balance, 2, '.', ',');
+        $negative = 0 - $this->balance;
+       //$negative = gmp_neg((int)$this->balance);
+        return $this->name . ", $" . number_format($negative, 2, '.', ',');
     }
 }
 
 $ben = new BankAccount("Benson", 17.25);
-$benson = new BankAccount("Benson", -17.50);
+$benson = new BankAccount("Benson", 17.50);
 
 echo $ben->show_user_name_and_balance();
 echo PHP_EOL;
-echo $benson->show_user_name_and_balance();
+echo $benson->showNegativeBalance();
 echo PHP_EOL;

@@ -14,6 +14,19 @@ class Player
         $this->cards[] = $card;
     }
 
+    public function cardSwitch(Player $from):void
+    {
+        $randomCardIndex = array_rand($from->cards);
+        $card = $from->cards[$randomCardIndex];
+        $this->addCard($card);
+        unset($from->cards[$randomCardIndex]);
+    }
+    public function showCards($player){
+        foreach ($player->getCards() as $card) {
+            echo $card->getDisplayValue() . ' ';
+        }
+    }
+
     public function hasPairCards(): bool
     {
         $symbols = [];
@@ -34,7 +47,7 @@ class Player
         $symbols = [];
 
         foreach ($this->cards as $card) {
-            $symbols[] = $card->getSymbol() ;
+            $symbols[] = $card->getSymbol();
         }
 
         $uniqueCardsCount = array_count_values($symbols);
@@ -43,7 +56,7 @@ class Player
             if ($count === 1) continue;
             if ($count === 2 || $count === 4) {
                 foreach ($this->cards as $index => $card){
-                    if($card->getSymbol() === (string)$symbol && $card->getSuit() === '♣' && $card->getSuit() === '♠' || $card->getSymbol() === (string)$symbol && $card->getSuit() === '♥' && $card->getSuit() === '♦'){
+                    if($card->getSymbol() === (string)$symbol){
                         unset($this->cards[$index]);
                     }
                 }
@@ -51,7 +64,7 @@ class Player
             if ($count === 3) {
                 for ($i = 0; $i < 2; $i++){
                     foreach ($this->cards as $index => $card){
-                        if($card->getSymbol() === (string)$symbol && $card->getSuit() === '♣' && $card->getSuit() === '♠' || $card->getSymbol() === (string)$symbol && $card->getSuit() === '♥' && $card->getSuit() === '♦'){
+                        if($card->getSymbol() === (string)$symbol){
                             unset($this->cards[$index]);
                             break;
                         }

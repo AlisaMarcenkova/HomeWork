@@ -11,6 +11,7 @@ $participants = ['$', '€', '£', '¥'];
 $track = range(1, 10);
 $speed = rand(1, 3);
 $racingTracks = [];
+$horse = '';
 
 for ($i = 0; $i < count($participants); $i++) {
     for ($j = 0; $j < $road; $j++) {
@@ -30,8 +31,9 @@ function trackVisible(array $track): void
 }
 
 while (true) {
+
     echo "Press 1 to race: " . PHP_EOL;
-    echo "Press 2 to choose track to bet on: " . PHP_EOL;
+    echo "Press 2 to choose a horse to bet on: " . PHP_EOL;
     echo "Press [X] to exit: " . PHP_EOL;
     $begin = readline("Select option: ");
     echo PHP_EOL;
@@ -41,12 +43,13 @@ while (true) {
         case 1:
                trackVisible($racingTracks);
 
+
             for ($i = 0; $i < count($racingTracks); $i++) {
-                for ($j = 0; $j < ($road - 1); $j++) {
-                    $racingTracks[$i][$speed] = $participants[$i];
-                    $racingTracks[$i][$j] = '-';
-                }
-            }
+                            for ($j = 0; $j < ($road - 1); $j++) {
+                                $racingTracks[$i][$speed] = $participants[$i];
+                                $racingTracks[$i][$j] = '-';
+                            }
+                        }
 
                            //for ($i = 0; $i < count($participants); $i++) {
             //                for ($j = 0; $j < $road; $j++) {
@@ -60,10 +63,10 @@ while (true) {
                 break;
 
         case 2:
-            echo "Bet on track [1] 100$" . PHP_EOL;
-            echo "Bet on track [2] 100$" . PHP_EOL;
-            echo "Bet on track [3] 100$" . PHP_EOL;
-            echo "Bet on track [4] 100$" . PHP_EOL;
+            echo "Bet on horse '$', [1] 100$" . PHP_EOL;
+            echo "Bet on horse '€', [2] 100$" . PHP_EOL;
+            echo "Bet on horse '£', [3] 100$" . PHP_EOL;
+            echo "Bet on horse '¥', [4] 100$" . PHP_EOL;
             $betOnTrack = (int)readline("Chose the track you're betting on: ") . PHP_EOL;
 
             $amount -= $bet;
